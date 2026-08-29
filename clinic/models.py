@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 
 class Service(models.Model):
-    """The 14 dental services offered."""
+    """The dental services offered."""
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
     short_description = models.TextField(max_length=300)
@@ -54,8 +54,16 @@ class Appointment(models.Model):
         ('completed', 'Completed'),
         ('cancelled', 'Cancelled'),
     )
+    
+    SERVICE_CHOICES = [
+        ('General Checkup', 'General Checkup'),
+        ('Teeth Cleaning', 'Teeth Cleaning'),
+        ('Teeth Whitening', 'Teeth Whitening'),
+        ('Root Canal', 'Root Canal'),
+    ]
+
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='appointments')
-    service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True, related_name='appointments')
+    service = models.CharField(max_length=50, choices=SERVICE_CHOICES)
     doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, null=True, blank=True, related_name='appointments')
     appointment_date = models.DateField()
     appointment_time = models.TimeField()
@@ -67,7 +75,7 @@ class Appointment(models.Model):
         ordering = ['-appointment_date', '-appointment_time']
 
     def __str__(self):
-        return f"{self.patient.full_name} – {self.service.name} on {self.appointment_date}"
+        return f"{self.patient.full_name} – {self.service} on {self.appointment_date}"
 
 class ContactMessage(models.Model):
     """Messages from the contact form."""
@@ -79,8 +87,6 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f"{self.name} – {self.subject}"
-    
-
 
 class Review(models.Model):
     name = models.CharField(max_length=100)
