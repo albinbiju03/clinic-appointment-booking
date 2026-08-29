@@ -29,8 +29,7 @@ SECRET_KEY = 'django-insecure-@_5d!3hlwf95lfnvmte*9k#w%fcp#1svdzqny7lh2+zp#*!b3-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['clinic-appointment-booking-tlv3.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
