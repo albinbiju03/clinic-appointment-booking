@@ -7,8 +7,8 @@ python -m pip install pipenv
 
 python -m pipenv install --system
 
-# Force install Pillow to bypass Pipenv lock issues
-python -m pip install Pillow
+# Force install required production packages to bypass Pipenv lock issues
+python -m pip install Pillow gunicorn whitenoise
 
 python manage.py collectstatic --no-input
 python manage.py migrate
