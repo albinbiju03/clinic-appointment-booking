@@ -2,6 +2,9 @@
 # exit on error
 set -o errexit
 
+python -m pip install --upgrade pip
+python -m pip install pipenv
+
 python -m pipenv install
 python manage.py collectstatic --no-input
 python manage.py migrate
