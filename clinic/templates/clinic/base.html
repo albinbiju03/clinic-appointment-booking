@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}SmileCare Dental{% endblock %}</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'clinic/css/style.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <i class="fas fa-tooth tooth-spinner"></i>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <a href="{% url 'clinic:home' %}" class="logo">
+        <i class="fas fa-tooth"></i> SmileCare Dental
+      </a>
+      <nav class="nav" id="mainNav">
+        <ul>
+          <li><a href="{% url 'clinic:home' %}">Home</a></li>
+          <li><a href="{% url 'clinic:about' %}">About</a></li>
+          <li><a href="{% url 'clinic:services' %}">Services</a></li>
+          <li><a href="{% url 'clinic:team' %}">Team</a></li>
+          <li><a href="{% url 'clinic:contact' %}">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="{% url 'clinic:booking' %}" class="btn-appoint desktop-btn">Book Appointment</a>
+      <button class="hamburger" id="hamburgerBtn"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="logo"><i class="fas fa-tooth"></i> SmileCare Dental</div>
+          <p>Modern dentistry with a gentle touch. Your smile is our priority.</p>
+          <div class="social-icons">
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-linkedin"></i>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="{% url 'clinic:home' %}">Home</a></li>
+            <li><a href="{% url 'clinic:about' %}">About</a></li>
+            <li><a href="{% url 'clinic:services' %}">Services</a></li>
+            <li><a href="{% url 'clinic:team' %}">Team</a></li>
+            <li><a href="{% url 'clinic:contact' %}">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="{% url 'clinic:services' %}#cleaning">Cleaning</a></li>
+            <li><a href="{% url 'clinic:services' %}#whitening">Whitening</a></li>
+            <li><a href="{% url 'clinic:services' %}#orthodontics">Orthodontics</a></li>
+            <li><a href="{% url 'clinic:services' %}#implants">Implants</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <p><i class="fas fa-phone-alt"></i> 6383764278</p>
+          <p><i class="fas fa-envelope"></i> hello@smilecaredental.com</p>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>© 2026 SmileCare Dental. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+  <!-- SCRIPTS -->
+  <script src="{% static 'clinic/js/script.js' %}" defer></script>
+
+  <script>
+    (function() {
+      var preloader = document.getElementById('preloader');
+      if (preloader) preloader.classList.add('hidden');
+
+      window.addEventListener('load', function() {
+        var pre = document.getElementById('preloader');
+        if (pre) pre.classList.add('hidden');
+      });
+
+      function activateReveals() {
+        var reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+        for (var i = 0; i < reveals.length; i++) {
+          reveals[i].classList.add('active');
+        }
+      }
+      activateReveals();
+      window.addEventListener('load', activateReveals);
+    })();
+  </script>
+
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

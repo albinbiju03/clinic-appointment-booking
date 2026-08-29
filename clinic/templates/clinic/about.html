@@ -1,0 +1,112 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block title %}About SmileCare Dental{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'clinic/css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ========== HERO ========== -->
+<section class="about-hero">
+  <div class="about-hero-bg">
+    <span class="floating-tooth">🦷</span>
+    <span class="floating-tooth">🪥</span>
+    <span class="floating-tooth">✨</span>
+    <span class="floating-tooth">😁</span>
+  </div>
+  <div class="container about-hero-content">
+    <h1 class="hero-title">We’re SmileCare</h1>
+    <p class="hero-sub">A team of passionate humans who believe every smile deserves expert care.</p>
+  </div>
+  <div class="wave-divider"></div>
+</section>
+
+<!-- ========== OUR STORY ========== -->
+<section class="story reveal">
+  <div class="container story-grid">
+    <div class="story-image reveal-left">
+      <img src="{% static 'clinic/images/about-story.jpg' %}" alt="Our Story" 
+           onerror="this.src='https://placehold.co/600x400/0A7E8C/white?text=Our+Story'">
+      <div class="floating-badge">Since 2025</div>
+    </div>
+    <div class="story-text reveal-right">
+      <h2>Our Story</h2>
+      <p>What started as a small neighbourhood clinic has grown into a trusted dental home for thousands of families. We combine advanced technology with a gentle, human touch – because we know a visit to the dentist should feel as comforting as it is effective.</p>
+      <p>Our founders,  Albin Biju and Donald Mathew, envisioned a space where patients are partners in their own care, where every question is welcomed, and where treatment is tailored to each unique smile.</p>
+      <div class="story-stats">
+        <div class="stat-item">
+          <span class="stat-number" data-target="500">0</span>
+          <span class="stat-label">Happy Patients</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="15">0</span>
+          <span class="stat-label">Expert Doctors</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="1">0</span>
+          <span class="stat-label">Years of Care</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MISSION & VALUES ========== -->
+<section class="mission reveal">
+  <div class="container">
+    <h2>Our Mission & Values</h2>
+    <div class="mission-grid">
+      <div class="mission-card">
+        <div class="mission-icon"><i class="fas fa-heart"></i></div>
+        <h3>Compassion</h3>
+        <p>We treat every patient like family, with empathy, patience, and genuine care.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-icon"><i class="fas fa-microscope"></i></div>
+        <h3>Innovation</h3>
+        <p>We invest in the latest technology – from digital X‑rays to 3D imaging – to deliver precise, comfortable treatment.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-icon"><i class="fas fa-hand-holding-heart"></i></div>
+        <h3>Integrity</h3>
+        <p>Honest advice, transparent pricing, and treatment plans that put your health first.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-icon"><i class="fas fa-smile"></i></div>
+        <h3>Joy</h3>
+        <p>We believe dentistry can be a positive experience – and we prove it every day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TEAM PREVIEW ========== -->
+<section class="team-preview reveal">
+  <div class="container">
+    <h2>The People Behind Your Smile</h2>
+    <div class="team-mini-grid">
+      <div class="team-mini-card">
+        <img src="{% static 'clinic/images/founder.jpeg' %}" alt="Dr. Albin Biju">
+        <h4> Albin Biju</h4>
+        <p>Founder </p>
+      </div>
+      
+</section>
+
+<!-- ========== CTA ========== -->
+<section class="about-cta">
+  <div class="container about-cta-content">
+    <h2>Ready to love your smile?</h2>
+    <p>Book an appointment today – we’ll take care of the rest.</p>
+    <a href="{% url 'clinic:booking' %}" class="btn btn-outline">Book Appointment</a>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'clinic/js/about.js' %}"></script>
+{% endblock %}

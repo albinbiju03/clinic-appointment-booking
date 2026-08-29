@@ -1,0 +1,55 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block title %}Sedation Dentistry – SmileCare Dental{% endblock %}
+
+{% block extra_css %}
+<style>
+  .service-hero {
+    background: linear-gradient(135deg, #0A7E8C, #2fb8c0);
+    padding: 6rem 0 4rem;
+    text-align: center;
+    color: white;
+    clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%);
+    margin-bottom: 3rem;
+  }
+  .service-hero i { font-size: 5rem; margin-bottom: 1rem; animation: iconPulse 2s infinite; }
+  @keyframes iconPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.15);} }
+  .service-content { max-width: 900px; margin: 0 auto; padding: 0 1rem 4rem; }
+  .service-img { width: 100%; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+  .desc { font-size: 1.1rem; line-height: 1.9; color: #444; margin-bottom: 2rem; }
+  .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .benefits li { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; background: #f8f9fa; padding: 0.8rem 1rem; border-radius: 10px; border-left: 4px solid #0A7E8C; }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="service-hero">
+  <i class="fas fa-laugh-beam"></i>
+  <h1>Sedation Dentistry</h1>
+  <p>Relax completely during treatment – ideal for dental anxiety.</p>
+</section>
+
+<div class="service-content">
+  <img src="{% static 'clinic/images/services/sedation_dentistry.jpg' %}" class="service-img" alt="Sedation Dentistry" onerror="this.src='https://placehold.co/900x400/0A7E8C/white?text=Sedation+Dentistry'">
+  
+  <div class="desc">
+    We offer oral sedation and nitrous oxide (laughing gas) to help you stay calm during any dental procedure. 
+    From mild relaxation to deep sedation, our experienced team tailors the approach to your comfort level. 
+    With safe monitoring and personalised care, you can wake up with no memory of the treatment and enjoy a stress‑free dental experience.
+  </div>
+
+  <ul class="benefits">
+    <li><i class="fas fa-check-circle"></i> Zero anxiety during treatment</li>
+    <li><i class="fas fa-check-circle"></i> Comfortable for long or multiple procedures</li>
+    <li><i class="fas fa-check-circle"></i> Safe, monitored sedation</li>
+    <li><i class="fas fa-check-circle"></i> Customised sedation levels</li>
+  </ul>
+
+  <div style="text-align: center;">
+    <a href="{% url 'clinic:booking' %}" class="btn btn-primary">Book This Service</a>
+    <br><br>
+    <a href="{% url 'clinic:services' %}"><i class="fas fa-arrow-left"></i> Back to All Services</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'clinic/base.html' %}
+
+{% block title %}Booking Confirmed – SmileCare Dental{% endblock %}
+
+{% block content %}
+<div style="text-align: center; padding: 4rem 1rem; max-width: 600px; margin: 0 auto;">
+  <i class="fas fa-check-circle" style="font-size: 5rem; color: #14B8A6; margin-bottom: 1rem;"></i>
+  <h1 style="color: #115E59; margin-bottom: 1rem;">Thank You!</h1>
+  <p style="font-size: 1.2rem; color: #475569; margin-bottom: 2rem;">
+    Your appointment request has been received. Our team will contact you shortly to confirm the details.
+  </p>
+  <a href="{% url 'clinic:home' %}" class="btn btn-outline" style="border-color: #14B8A6; color: #14B8A6;">Back to Home</a>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block title %}Root Canal – SmileCare Dental{% endblock %}
+
+{% block extra_css %}
+<style>
+  .service-hero { background: linear-gradient(135deg, #0A7E8C, #085f6b); padding: 6rem 0 4rem; text-align: center; color: white; clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%); margin-bottom: 3rem; }
+  .service-hero i { font-size: 5rem; margin-bottom: 1rem; animation: iconPulse 2s infinite; }
+  @keyframes iconPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.15);} }
+  .service-content { max-width: 900px; margin: 0 auto; padding: 0 1rem 4rem; }
+  .service-img { width: 100%; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+  .desc { font-size: 1.1rem; line-height: 1.9; color: #444; margin-bottom: 2rem; }
+  .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .benefits li { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; background: #f2f8f9; padding: 0.8rem 1rem; border-radius: 10px; border-left: 4px solid #0A7E8C; transition: transform 0.3s, box-shadow 0.3s; }
+  .benefits li:hover { transform: translateX(8px); box-shadow: 0 6px 20px rgba(10,126,140,0.1); }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="service-hero">
+  <i class="fas fa-stethoscope"></i>
+  <h1>Root Canal</h1>
+  <p>Pain‑free endodontic therapy – save your natural teeth.</p>
+</section>
+
+<div class="service-content">
+  <img src="{% static 'clinic/images/services/root_canal.jpg' %}" class="service-img" alt="Root Canal" onerror="this.src='https://placehold.co/900x400/0A7E8C/white?text=Root+Canal'">
+  <div class="desc">
+    With modern microscopic technology, root canals are now as comfortable as a filling. 
+    We remove infected pulp, clean the canals, and seal them to prevent reinfection. 
+    You’ll leave pain‑free and keep your natural tooth. Microscope‑assisted precision ensures success.
+  </div>
+  <ul class="benefits">
+    <li><i class="fas fa-check-circle"></i> Immediate pain relief</li>
+    <li><i class="fas fa-check-circle"></i> Saves tooth from extraction</li>
+    <li><i class="fas fa-check-circle"></i> Microscope‑assisted precision</li>
+    <li><i class="fas fa-check-circle"></i> Gentle & anxiety‑free</li>
+  </ul>
+  <div style="text-align: center;">
+    <a href="{% url 'clinic:booking' %}" class="btn btn-primary">Book This Service</a>
+    <br><br>
+    <a href="{% url 'clinic:services' %}"><i class="fas fa-arrow-left"></i> Back to All Services</a>
+  </div>
+</div>
+{% endblock %}

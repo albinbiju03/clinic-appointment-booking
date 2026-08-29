@@ -1,0 +1,153 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block title %}Book Your Smile – SmileCare Dental{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'clinic/css/booking.css' %}">
+<style>
+  /* Modal styles (in case they are not in booking.css) */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 2000;
+    align-items: center; justify-content: center;
+  }
+  .modal.open { display: flex; }
+  .modal-content {
+    background: white; padding: 2rem; border-radius: 24px;
+    text-align: center; max-width: 400px; width: 90%;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .close-btn {
+    position: absolute; top: 10px; right: 15px;
+    font-size: 1.5rem; cursor: pointer; color: #64748B;
+    transition: color 0.3s;
+  }
+  .close-btn:hover { color: #115E59; }
+  #slotModalMessage { margin: 1.5rem 0; font-size: 1.1rem; color: #1E293B; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="booking-page">
+  <div class="cartoon-bubble">🦷</div>
+  <div class="cartoon-bubble">😁</div>
+  <div class="cartoon-bubble">✨</div>
+  <div class="cartoon-bubble">🪥</div>
+  <div class="cartoon-bubble">💎</div>
+
+  <div class="booking-card">
+    <div class="mascot">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='90' fill='%23ffffff' stroke='%230A7E8C' stroke-width='8'/%3E%3Ccircle cx='75' cy='80' r='12' fill='%230A7E8C'/%3E%3Ccircle cx='125' cy='80' r='12' fill='%230A7E8C'/%3E%3Cpath d='M70 120 Q100 150 130 120' stroke='%230A7E8C' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='60' cy='60' r='15' fill='%23FFD166' opacity='0.5'/%3E%3Ccircle cx='140' cy='50' r='10' fill='%23FFD166' opacity='0.5'/%3E%3C/svg%3E" alt="Happy Tooth">
+    </div>
+
+    <h2>Book Your Visit</h2>
+    <p class="subtitle">Choose a service and pick a date – we'll make you smile!</p>
+
+    {% if form.errors %}
+      <div class="form-errors-box">
+        <strong>Please fix the following:</strong>
+        {{ form.errors }}
+      </div>
+    {% endif %}
+
+    <form method="post" class="booking-form">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <i class="fas fa-user"></i>
+        {{ form.full_name }}
+        {{ form.full_name.errors }}
+      </div>
+      <div class="form-group">
+        <i class="fas fa-envelope"></i>
+        {{ form.email }}
+        {{ form.email.errors }}
+      </div>
+      <div class="form-group">
+        <i class="fas fa-phone-alt"></i>
+        {{ form.phone }}
+        {{ form.phone.errors }}
+      </div>
+      <div class="form-group">
+        <i class="fas fa-tooth"></i>
+        {{ form.service }}
+        {{ form.service.errors }}
+      </div>
+      <div class="form-group">
+        <i class="fas fa-user-md"></i>
+        {{ form.doctor }}
+        {{ form.doctor.errors }}
+      </div>
+      <div class="form-group">
+        <i class="fas fa-calendar-alt"></i>
+        {{ form.appointment_date }}
+        {{ form.appointment_date.errors }}
+      </div>
+      <div class="form-group">
+        <i class="fas fa-clock"></i>
+        {{ form.appointment_time }}
+        {{ form.appointment_time.errors }}
+      </div>
+      <div class="form-group">
+        <i class="fas fa-pencil-alt"></i>
+        {{ form.notes }}
+        {{ form.notes.errors }}
+      </div>
+
+      <button type="submit" class="btn-appoint">Request Appointment 🌟</button>
+    </form>
+  </div>
+</div>
+
+<!-- Slot Conflict Popup Modal -->
+<div id="slotModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeSlotModal()">&times;</span>
+    <h3>⏰ Slot Unavailable</h3>
+    <p id="slotModalMessage">This time-slot has already been taken. Please choose another time.</p>
+    <button class="btn btn-primary" onclick="closeSlotModal()">OK</button>
+  </div>
+</div>
+
+<!-- Hidden flag set by the view when a slot conflict is detected -->
+{% if slot_conflict %}
+<div id="slot-error-flag" style="display:none;"></div>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'clinic/js/booking.js' %}"></script>
+<script>
+  // Slot conflict modal functions
+  function showSlotModal(message) {
+    var modal = document.getElementById('slotModal');
+    var msg = document.getElementById('slotModalMessage');
+    if (modal && msg) {
+      msg.textContent = message;
+      modal.classList.add('open');
+    }
+  }
+  function closeSlotModal() {
+    var modal = document.getElementById('slotModal');
+    if (modal) modal.classList.remove('open');
+  }
+  // Close modal if user clicks outside the box
+  window.addEventListener('click', function(event) {
+    var modal = document.getElementById('slotModal');
+    if (event.target === modal) closeSlotModal();
+  });
+
+  // If the hidden flag exists, show the popup automatically
+  document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('slot-error-flag')) {
+      showSlotModal('This time-slot has already been taken. Please choose another time.');
+    }
+  });
+</script>
+{% endblock %}

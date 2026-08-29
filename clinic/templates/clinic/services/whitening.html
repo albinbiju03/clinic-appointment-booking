@@ -1,0 +1,46 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block title %}Teeth Whitening – SmileCare Dental{% endblock %}
+
+{% block extra_css %}
+<style>
+  .service-hero { background: linear-gradient(135deg, #4AB3B3, #2fb8c0); padding: 6rem 0 4rem; text-align: center; color: white; clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%); margin-bottom: 3rem; }
+  .service-hero i { font-size: 5rem; margin-bottom: 1rem; animation: iconPulse 2s infinite; }
+  @keyframes iconPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.15);} }
+  .service-content { max-width: 900px; margin: 0 auto; padding: 0 1rem 4rem; }
+  .service-img { width: 100%; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+  .desc { font-size: 1.1rem; line-height: 1.9; color: #444; margin-bottom: 2rem; }
+  .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .benefits li { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; background: #f8f9fa; padding: 0.8rem 1rem; border-radius: 10px; border-left: 4px solid #4AB3B3; transition: transform 0.3s, box-shadow 0.3s; }
+  .benefits li:hover { transform: translateX(8px); box-shadow: 0 6px 20px rgba(74,179,179,0.2); }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="service-hero">
+  <i class="fas fa-tint"></i>
+  <h1>Teeth Whitening</h1>
+  <p>Safe, effective teeth whitening. Instant radiance.</p>
+</section>
+
+<div class="service-content">
+  <img src="{% static 'clinic/images/services/whitening.jpg' %}" class="service-img" alt="Whitening" onerror="this.src='https://placehold.co/900x400/4AB3B3/white?text=Whitening'">
+  <div class="desc">
+    Our in‑office and take‑home whitening systems use professional‑grade gel that penetrates enamel to lift years of discolouration. 
+    The Zoom! lamp accelerates the process safely, giving you a noticeably whiter smile in just one hour. 
+    No sensitivity, long‑lasting results, and custom trays for home maintenance.
+  </div>
+  <ul class="benefits">
+    <li><i class="fas fa-check-circle"></i> Removes coffee, tea, and tobacco stains</li>
+    <li><i class="fas fa-check-circle"></i> Clinically proven safe</li>
+    <li><i class="fas fa-check-circle"></i> Immediate visible results</li>
+    <li><i class="fas fa-check-circle"></i> Custom trays for home maintenance</li>
+  </ul>
+  <div style="text-align: center;">
+    <a href="{% url 'clinic:booking' %}" class="btn btn-primary">Book This Service</a>
+    <br><br>
+    <a href="{% url 'clinic:services' %}"><i class="fas fa-arrow-left"></i> Back to All Services</a>
+  </div>
+</div>
+{% endblock %}

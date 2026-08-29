@@ -1,0 +1,183 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block title %}SmileCare Dental - Home{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTION (video background + fallback image) -->
+<section class="hero hero-video">
+  <div class="hero-video-wrapper">
+    <video autoplay loop muted playsinline class="hero-bg-video">
+      <source src="{% static 'clinic/videos/vid1.mp4' %}" type="video/mp4">
+      <img src="{% static 'clinic/images/img1.jpg' %}" alt="SmileCare Dental Clinic">
+    </video>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="container hero-container">
+    <div class="hero-content">
+      <h1>Welcome to SmileCare Dental</h1>
+      <p class="tagline">Advanced dentistry for a healthy, beautiful smile</p>
+      <a href="{% url 'clinic:booking' %}" class="btn btn-outline">Book Appointment</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section class="about reveal">
+  <div class="container about-grid">
+    <div class="about-text reveal-left">
+      <h2>About Us</h2>
+      <p>At SmileCare Dental, we combine cutting‑edge technology with a gentle touch. Our mission is to provide comprehensive, compassionate care for the whole family in a modern and comfortable setting.</p>
+      <ul>
+        <li><i class="fas fa-check-circle"></i> Experienced team of specialists</li>
+        <li><i class="fas fa-check-circle"></i> State‑of‑the‑art equipment</li>
+        <li><i class="fas fa-check-circle"></i> Comfortable, anxiety‑free environment</li>
+        <li><i class="fas fa-check-circle"></i> Personalized treatment plans</li>
+      </ul>
+      <div class="load-more-container">
+        <a href="{% url 'clinic:about' %}" class="btn btn-primary">More About Us</a>
+      </div>
+    </div>
+    <div class="about-image reveal-right">
+      <img src="{% static 'clinic/images/img1.jpg' %}" alt="Modern dental clinic interior">
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES SECTION -->
+<section class="services reveal">
+  <div class="container">
+    <h2>Our Dental Services</h2>
+    <div class="card-grid">
+      <div class="service-card"><i class="fas fa-brush"></i><h3>Cleaning</h3><p>Professional hygiene and prophylaxis.</p></div>
+      <div class="service-card"><i class="fas fa-tint"></i><h3>Whitening</h3><p>Safe, effective teeth whitening.</p></div>
+      <div class="service-card"><i class="fas fa-ambulance"></i><h3>Emergency Care</h3><p>Immediate care for dental emergencies.</p></div>
+      <div class="service-card"><i class="fas fa-tooth"></i><h3>Implants</h3><p>Permanent tooth replacement.</p></div>
+      <div class="service-card"><i class="fas fa-child"></i><h3>Pediatric</h3><p>Gentle care for children.</p></div>
+      <div class="service-card"><i class="fas fa-teeth"></i><h3>Veneers</h3><p>Porcelain veneers for a perfect smile.</p></div>
+      <div class="service-card"><i class="fas fa-stethoscope"></i><h3>Root Canal</h3><p>Pain-free endodontic therapy.</p></div>
+      <div class="service-card"><i class="fas fa-procedures"></i><h3>Dentures</h3><p>Custom-made dentures for a natural look.</p></div>
+    </div>
+    <div class="load-more-container">
+      <a href="{% url 'clinic:services' %}" class="btn btn-primary">View All Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="features reveal">
+  <div class="container">
+    <h2>Why Choose Us</h2>
+    <div class="features-row">
+      <div class="feature-card"><i class="fas fa-user-md"></i><h4>Expert Dentists</h4><p>Board‑certified with years of experience.</p></div>
+      <div class="feature-card"><i class="fas fa-microscope"></i><h4>Modern Technology</h4><p>Digital X‑rays, 3D imaging, laser dentistry.</p></div>
+      <div class="feature-card"><i class="fas fa-couch"></i><h4>Comfortable Environment</h4><p>Relaxing atmosphere & sedation options.</p></div>
+      <div class="feature-card"><i class="fas fa-clock"></i><h4>Flexible Hours</h4><p>Evening and weekend appointments.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MEET OUR TEAM – Ultra Safe Test Version -->
+<section style="padding: 6rem 0; background: #f0f4f8;">
+  <div class="container">
+    <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #0F766E;">Meet Our Team</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2.5rem;">
+
+      <!-- Albin Biju -->
+      <div style="background: white; border-radius: 20px; padding: 2rem; text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,0.08);">
+        <img src="{% static 'clinic/images/founder.jpeg' %}" alt="Albin Biju" 
+
+             alt="Albin Biju" 
+             style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; margin: 0 auto 1rem; display: block;">
+        <h4 style="font-size: 1.3rem; color: #0F766E; margin-bottom: 0.5rem;">Albin Biju</h4>
+        <p style="color: #475569;">Web Developer & Founder</p>
+        <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Designed & developed the entire SmileCare platform.</p>
+      </div>
+
+      
+
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS CAROUSEL (dynamic) -->
+<section class="testimonials reveal">
+  <div class="container">
+    <h2>What Our Patients Say</h2>
+    {% if latest_reviews %}
+    <div class="testimonial-grid" id="reviewGrid">
+      {% for review in latest_reviews %}
+      <div class="testimonial-card">
+        <i class="fas fa-quote-left"></i>
+        <div class="stars">
+          {% for i in "12345" %}
+          {% if forloop.counter <= review.rating %}
+          <i class="fas fa-star"></i>
+          {% else %}
+          <i class="far fa-star"></i>
+          {% endif %}
+          {% endfor %}
+        </div>
+        <p>{{ review.comment }}</p>
+        <div class="patient">
+          <img src="https://ui-avatars.com/api/?name={{ review.name|urlencode }}&size=50&background=0F766E&color=fff" alt="{{ review.name }}">
+          <div>
+            <h5>{{ review.name }}</h5>
+            <span>{{ review.created_at|date:"M d, Y" }}</span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="carousel-controls">
+      <button id="prevTestimonial" onclick="document.getElementById('reviewGrid').scrollBy({left: -350, behavior: 'smooth'})"><i class="fas fa-chevron-left"></i></button>
+      <button id="nextTestimonial" onclick="document.getElementById('reviewGrid').scrollBy({left: 350, behavior: 'smooth'})"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    {% else %}
+    <p style="text-align: center; padding: 2rem;">No reviews yet. Be the first to share your experience!</p>
+    {% endif %}
+
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="{% url 'clinic:reviews' %}" class="btn btn-primary">📝 Leave a Review</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION (vibrant animated clinic info + image) -->
+<section class="contact reveal">
+  <div class="container contact-grid">
+    <div class="contact-info reveal-right">
+      <h3>Visit Our Clinic</h3>
+      <div class="info-item">
+        <i class="fas fa-map-marker-alt animate-icon"></i>
+        <p>Nagasandara, Bangalore<br>-560073</p>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-phone-alt animate-icon"></i>
+        <p>6383764278</p>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-envelope animate-icon"></i>
+        <p>hello@smilecaredental.com</p>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-clock animate-icon"></i>
+        <p>Mon–Fri: 8am – 6pm<br>Sat: 9am – 2pm</p>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-tooth animate-icon" style="color:#FFD166;"></i>
+        <p><em>We make you smile!</em></p>
+      </div>
+    </div>
+    <div class="contact-image reveal-left">
+      <img src="{% static 'clinic/images/img3.jpg' %}" alt="Modern dental clinic interior">
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'clinic/js/script.js' %}"></script>
+{% endblock %}

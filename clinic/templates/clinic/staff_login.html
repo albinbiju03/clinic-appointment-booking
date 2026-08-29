@@ -1,0 +1,14 @@
+{% extends 'clinic/base.html' %}
+{% block title %}Staff Login{% endblock %}
+{% block content %}
+<section style="padding: 4rem 0; background: #F8FAFC; min-height: 60vh;">
+  <div class="container" style="max-width: 450px; margin: 0 auto;">
+    <h2 style="text-align: center; color: #0F766E; margin-bottom: 2rem;">Staff Login</h2>
+    <form method="post" style="background: #fff; padding: 2rem; border-radius: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.06);">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

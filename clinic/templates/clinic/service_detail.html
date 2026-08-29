@@ -1,0 +1,230 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block title %}{{ service.name }} – SmileCare Dental{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* ========================================
+     UNIQUE SERVICE‑PAGE STYLES
+     ======================================== */
+  :root {
+    --s-primary: var(--primary, #0A7E8C);
+    --s-accent: var(--accent, #FFD166);
+  }
+
+  /* Hero */
+  .service-hero {
+    background: linear-gradient(135deg, var(--s-primary), #2fb8c0);
+    padding: 6rem 0 5rem;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%);
+    margin-bottom: 4rem;
+  }
+  .service-hero::before {
+    content: "";
+    position: absolute;
+    width: 350px; height: 350px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 40% 60% 70% 30% / 45% 45% 55% 55%;
+    top: -100px; right: -80px;
+    animation: floatBlob 10s ease-in-out infinite;
+  }
+  @keyframes floatBlob {
+    0%,100% { transform: translate(0,0) rotate(0deg); }
+    50% { transform: translate(30px,-30px) rotate(5deg); }
+  }
+  .service-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    animation: fadeInDown 0.8s ease;
+  }
+  .service-hero .subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    animation: fadeInUp 0.8s ease 0.2s both;
+  }
+  .hero-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    animation: iconPulse 2s ease-in-out infinite;
+  }
+  @keyframes iconPulse {
+    0%,100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Content section */
+  .service-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem 4rem;
+  }
+  .service-image {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .service-image.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .description-text {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #444;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+  }
+  .description-text.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .benefits-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease 0.6s, transform 0.8s ease 0.6s;
+  }
+  .benefits-list.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .benefits-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 600;
+    background: #f9fbfb;
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    border-left: 4px solid var(--s-primary);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .benefits-list li:hover {
+    transform: translateX(8px);
+    box-shadow: 0 6px 20px rgba(10,126,140,0.1);
+  }
+  .benefits-list li i {
+    color: var(--s-primary);
+    font-size: 1.2rem;
+  }
+  .back-link {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .back-link a {
+    color: var(--s-primary);
+    font-weight: 600;
+    text-decoration: underline;
+    transition: opacity 0.3s;
+  }
+  .back-link a:hover {
+    opacity: 0.7;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .service-hero h1 { font-size: 2.2rem; }
+    .service-hero { padding: 4rem 0 3rem; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="service-hero">
+  <div class="container">
+    <i class="{{ service.icon }} hero-icon"></i>
+    <h1>{{ service.name }}</h1>
+    <p class="subtitle">{{ service.short_desc }}</p>
+    <span class="card-badge" style="background: rgba(255,255,255,0.2); color:#fff; padding: 0.4rem 1.5rem; border-radius: 30px; font-weight: 600;">{{ service.badge }}</span>
+  </div>
+</section>
+
+<!-- DETAIL CONTENT -->
+<div class="service-content">
+  <!-- Image (falls back to placeholder) -->
+  <img 
+    src="{% static service.image %}" 
+    alt="{{ service.name }}" 
+    class="service-image" 
+    id="serviceImage"
+    onerror="this.onerror=null;this.src='https://placehold.co/900x400/0A7E8C/white?text={{ service.name|urlencode }}'"
+  >
+
+  <!-- Full description -->
+  <div class="description-text" id="descText">
+    {{ service.full_desc|linebreaksbr }}
+  </div>
+
+  <!-- Benefits -->
+  <ul class="benefits-list" id="benefitsList">
+    {% for benefit in service.benefits %}
+      <li><i class="fas fa-check-circle"></i> {{ benefit }}</li>
+    {% endfor %}
+  </ul>
+
+  <!-- Back to all services -->
+  <div class="back-link">
+    <a href="{% url 'clinic:services' %}"><i class="fas fa-arrow-left"></i> Back to All Services</a>
+    &nbsp; | &nbsp;
+    <a href="{% url 'clinic:booking' %}" class="btn btn-primary" style="vertical-align: middle;">Book This Service</a>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Scroll‑triggered reveal for image, description, and benefits
+  const elementsToReveal = [
+    document.getElementById('serviceImage'),
+    document.getElementById('descText'),
+    document.getElementById('benefitsList')
+  ];
+
+  function revealOnScroll() {
+    elementsToReveal.forEach(el => {
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      if (rect.top < windowHeight - 100) {
+        el.classList.add('revealed');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
+  // Run once on load in case elements are already in view
+  revealOnScroll();
+</script>
+{% endblock %}

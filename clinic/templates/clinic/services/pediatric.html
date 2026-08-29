@@ -1,0 +1,46 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block title %}Pediatric Dentistry – SmileCare Dental{% endblock %}
+
+{% block extra_css %}
+<style>
+  .service-hero { background: linear-gradient(135deg, #FFD166, #FFB347); padding: 6rem 0 4rem; text-align: center; color: #333; clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%); margin-bottom: 3rem; }
+  .service-hero i { font-size: 5rem; margin-bottom: 1rem; animation: iconPulse 2s infinite; }
+  @keyframes iconPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.15);} }
+  .service-content { max-width: 900px; margin: 0 auto; padding: 0 1rem 4rem; }
+  .service-img { width: 100%; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+  .desc { font-size: 1.1rem; line-height: 1.9; color: #444; margin-bottom: 2rem; }
+  .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .benefits li { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; background: #fff3e0; padding: 0.8rem 1rem; border-radius: 10px; border-left: 4px solid #FFB347; transition: transform 0.3s, box-shadow 0.3s; }
+  .benefits li:hover { transform: translateX(8px); box-shadow: 0 6px 20px rgba(255,179,71,0.2); }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="service-hero">
+  <i class="fas fa-child"></i>
+  <h1>Pediatric Dentistry</h1>
+  <p>Gentle care for children – positive experiences from the start.</p>
+</section>
+
+<div class="service-content">
+  <img src="{% static 'clinic/images/services/pediatric.jpg' %}" class="service-img" alt="Pediatric" onerror="this.src='https://placehold.co/900x400/FFD166/333?text=Pediatric'">
+  <div class="desc">
+    Our pediatric dentist creates a fun, friendly environment where children feel safe. 
+    We focus on prevention (sealants, fluoride), early orthodontic assessment, and teaching healthy habits. 
+    Sedation options are available for anxious kids. We make every visit a “happy visit”.
+  </div>
+  <ul class="benefits">
+    <li><i class="fas fa-check-circle"></i> Pain‑free “happy visits”</li>
+    <li><i class="fas fa-check-circle"></i> Special needs friendly</li>
+    <li><i class="fas fa-check-circle"></i> Cavity prevention</li>
+    <li><i class="fas fa-check-circle"></i> Early habit correction</li>
+  </ul>
+  <div style="text-align: center;">
+    <a href="{% url 'clinic:booking' %}" class="btn btn-primary">Book This Service</a>
+    <br><br>
+    <a href="{% url 'clinic:services' %}"><i class="fas fa-arrow-left"></i> Back to All Services</a>
+  </div>
+</div>
+{% endblock %}

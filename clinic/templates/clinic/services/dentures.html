@@ -1,0 +1,46 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block title %}Dentures – SmileCare Dental{% endblock %}
+
+{% block extra_css %}
+<style>
+  .service-hero { background: linear-gradient(135deg, #0A7E8C, #085f6b); padding: 6rem 0 4rem; text-align: center; color: white; clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%); margin-bottom: 3rem; }
+  .service-hero i { font-size: 5rem; margin-bottom: 1rem; animation: iconPulse 2s infinite; }
+  @keyframes iconPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.15);} }
+  .service-content { max-width: 900px; margin: 0 auto; padding: 0 1rem 4rem; }
+  .service-img { width: 100%; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+  .desc { font-size: 1.1rem; line-height: 1.9; color: #444; margin-bottom: 2rem; }
+  .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .benefits li { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; background: #f2f8f9; padding: 0.8rem 1rem; border-radius: 10px; border-left: 4px solid #0A7E8C; transition: transform 0.3s, box-shadow 0.3s; }
+  .benefits li:hover { transform: translateX(8px); box-shadow: 0 6px 20px rgba(10,126,140,0.1); }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="service-hero">
+  <i class="fas fa-hand-holding-heart"></i>
+  <h1>Dentures</h1>
+  <p>Custom‑fit partial & full dentures – comfortable & aesthetic.</p>
+</section>
+
+<div class="service-content">
+  <img src="{% static 'clinic/images/services/dentures.jpg' %}" class="service-img" alt="Dentures" onerror="this.src='https://placehold.co/900x400/0A7E8C/white?text=Dentures'">
+  <div class="desc">
+    Modern dentures are lightweight, flexible, and extremely natural‑looking. 
+    We offer precision‑fitted removable prostheses that restore full chewing function and facial aesthetics. 
+    Immediate dentures available. Same‑day relines and adjustments ensure a perfect, comfortable fit.
+  </div>
+  <ul class="benefits">
+    <li><i class="fas fa-check-circle"></i> Improved speech and chewing</li>
+    <li><i class="fas fa-check-circle"></i> Natural gum shades</li>
+    <li><i class="fas fa-check-circle"></i> Flexible frameworks</li>
+    <li><i class="fas fa-check-circle"></i> Same‑day relines</li>
+  </ul>
+  <div style="text-align: center;">
+    <a href="{% url 'clinic:booking' %}" class="btn btn-primary">Book This Service</a>
+    <br><br>
+    <a href="{% url 'clinic:services' %}"><i class="fas fa-arrow-left"></i> Back to All Services</a>
+  </div>
+</div>
+{% endblock %}

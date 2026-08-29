@@ -1,0 +1,46 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block title %}Periodontics – SmileCare Dental{% endblock %}
+
+{% block extra_css %}
+<style>
+  .service-hero { background: linear-gradient(135deg, #4AB3B3, #2fb8c0); padding: 6rem 0 4rem; text-align: center; color: white; clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%); margin-bottom: 3rem; }
+  .service-hero i { font-size: 5rem; margin-bottom: 1rem; animation: iconPulse 2s infinite; }
+  @keyframes iconPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.15);} }
+  .service-content { max-width: 900px; margin: 0 auto; padding: 0 1rem 4rem; }
+  .service-img { width: 100%; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+  .desc { font-size: 1.1rem; line-height: 1.9; color: #444; margin-bottom: 2rem; }
+  .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .benefits li { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; background: #eef9f9; padding: 0.8rem 1rem; border-radius: 10px; border-left: 4px solid #4AB3B3; transition: transform 0.3s, box-shadow 0.3s; }
+  .benefits li:hover { transform: translateX(8px); box-shadow: 0 6px 20px rgba(74,179,179,0.2); }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="service-hero">
+  <i class="fas fa-shield-virus"></i>
+  <h1>Periodontics</h1>
+  <p>Gum disease treatment & deep cleaning – laser therapy available.</p>
+</section>
+
+<div class="service-content">
+  <img src="{% static 'clinic/images/services/periodontics.jpg' %}" class="service-img" alt="Periodontics" onerror="this.src='https://placehold.co/900x400/4AB3B3/white?text=Periodontics'">
+  <div class="desc">
+    Periodontics focuses on the supporting structures of teeth. We treat gingivitis and periodontitis with scaling & root planing, 
+    and if needed, laser gum therapy. Healthy gums are the foundation of a healthy mouth. 
+    Stopping bone loss and reducing bad breath are our priorities.
+  </div>
+  <ul class="benefits">
+    <li><i class="fas fa-check-circle"></i> Halts bone loss</li>
+    <li><i class="fas fa-check-circle"></i> Reduces bad breath</li>
+    <li><i class="fas fa-check-circle"></i> Laser therapy (minimally invasive)</li>
+    <li><i class="fas fa-check-circle"></i> Prevents tooth loss</li>
+  </ul>
+  <div style="text-align: center;">
+    <a href="{% url 'clinic:booking' %}" class="btn btn-primary">Book This Service</a>
+    <br><br>
+    <a href="{% url 'clinic:services' %}"><i class="fas fa-arrow-left"></i> Back to All Services</a>
+  </div>
+</div>
+{% endblock %}

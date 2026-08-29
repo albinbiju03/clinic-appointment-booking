@@ -1,0 +1,100 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block title %}Dental Cleaning – SmileCare Dental{% endblock %}
+
+{% block extra_css %}
+<style>
+  .service-hero {
+    background: linear-gradient(135deg, #0A7E8C, #2fb8c0);
+    padding: 6rem 0 4rem;
+    text-align: center;
+    color: white;
+    clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%);
+    margin-bottom: 3rem;
+  }
+  .service-hero i {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    animation: iconPulse 2s infinite;
+  }
+  @keyframes iconPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+  .service-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem 4rem;
+  }
+  .service-img {
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  }
+  .desc {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #444;
+    margin-bottom: 2rem;
+  }
+  .benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .benefits li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    background: #f8f9fa;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    border-left: 4px solid #0A7E8C;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .benefits li:hover {
+    transform: translateX(8px);
+    box-shadow: 0 6px 20px rgba(10,126,140,0.1);
+  }
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+<section class="service-hero">
+  <i class="fas fa-brush"></i>
+  <h1>Dental Cleaning</h1>
+  <p>Professional hygiene and prophylaxis – fresh breath, healthy gums.</p>
+</section>
+
+<div class="service-content">
+  <img
+    src="{% static 'clinic/images/services/cleaning.jpg' %}"
+    class="service-img"
+    alt="Dental Cleaning"
+    onerror="this.src='https://placehold.co/900x400/0A7E8C/white?text=Cleaning'"
+  >
+  <div class="desc">
+    Our thorough dental cleaning removes plaque, tartar, and surface stains that daily brushing cannot reach.
+    Using ultrasonic scalers and gentle hand instruments, our hygienists meticulously clean every tooth surface.
+    Regular cleanings every 6 months help prevent cavities, gum disease, and bad breath.
+    The session includes a full periodontal assessment, oral cancer screening, and personalised home‑care advice.
+  </div>
+
+  <ul class="benefits">
+    <li><i class="fas fa-check-circle"></i> Removes stubborn plaque and tartar</li>
+    <li><i class="fas fa-check-circle"></i> Prevents gum disease (gingivitis/periodontitis)</li>
+    <li><i class="fas fa-check-circle"></i> Fresher breath and brighter smile</li>
+    <li><i class="fas fa-check-circle"></i> Early detection of dental issues</li>
+  </ul>
+
+  <div style="text-align: center;">
+    <a href="{% url 'clinic:booking' %}" class="btn btn-primary">Book This Service</a>
+    <br><br>
+    <a href="{% url 'clinic:services' %}"><i class="fas fa-arrow-left"></i> Back to All Services</a>
+  </div>
+</div>
+{% endblock content %}

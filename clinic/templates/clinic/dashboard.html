@@ -1,0 +1,36 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block title %}My Dashboard – SmileCare Dental{% endblock %}
+
+{% block content %}
+<section class="dashboard-section">
+  <div class="container">
+    <h2 class="dashboard-heading">My Appointments</h2>
+
+    {% if appointments %}
+      <div class="appointment-list">
+        {% for appointment in appointments %}
+          <div class="appointment-card">
+            <div class="appointment-info">
+              <h4>{{ appointment.service.name|default:"Unknown Service" }}</h4>
+              <p class="appointment-date">
+                {{ appointment.appointment_date|date:"F d, Y" }} at {{ appointment.appointment_time|time:"g:i A" }}
+              </p>
+            </div>
+            <span class="status-badge status-{{ appointment.status }}">
+              {{ appointment.status|title }}
+            </span>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-state">
+        <i class="fas fa-calendar-check"></i>
+        <p>You don't have any appointments yet.</p>
+        <a href="{% url 'clinic:booking' %}" class="btn btn-primary">Book One Now</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock content %}

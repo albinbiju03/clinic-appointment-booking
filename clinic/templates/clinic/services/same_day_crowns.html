@@ -1,0 +1,46 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block title %}Same‑Day Crowns – SmileCare Dental{% endblock %}
+
+{% block extra_css %}
+<style>
+  .service-hero { background: linear-gradient(135deg, #F59E0B, #D97706); padding: 6rem 0 4rem; text-align: center; color: white; clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%); margin-bottom: 3rem; }
+  .service-hero i { font-size: 5rem; margin-bottom: 1rem; animation: iconPulse 2s infinite; }
+  @keyframes iconPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.15);} }
+  .service-content { max-width: 900px; margin: 0 auto; padding: 0 1rem 4rem; }
+  .service-img { width: 100%; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+  .desc { font-size: 1.1rem; line-height: 1.9; color: #444; margin-bottom: 2rem; }
+  .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .benefits li { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; background: #fef3e0; padding: 0.8rem 1rem; border-radius: 10px; border-left: 4px solid #F59E0B; transition: transform 0.3s, box-shadow 0.3s; }
+  .benefits li:hover { transform: translateX(8px); box-shadow: 0 6px 20px rgba(245,158,11,0.2); }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="service-hero">
+  <i class="fas fa-crown"></i>
+  <h1>Same‑Day Crowns</h1>
+  <p>CEREC® technology – strong ceramic crowns in one visit.</p>
+</section>
+
+<div class="service-content">
+  <img src="{% static 'clinic/images/services/same_day_crowns.jpg' %}" class="service-img" alt="Same‑Day Crowns" onerror="this.src='https://placehold.co/900x400/F59E0B/white?text=Same‑Day+Crowns'">
+  <div class="desc">
+    With CEREC digital scanning and milling, we can design, create, and place a custom porcelain crown in about an hour. 
+    No messy impressions, no temporary crowns, and no second appointment. 
+    The result is a strong, metal‑free, perfectly fitting crown that blends seamlessly with your natural teeth.
+  </div>
+  <ul class="benefits">
+    <li><i class="fas fa-check-circle"></i> One‑visit convenience</li>
+    <li><i class="fas fa-check-circle"></i> No temporary crown</li>
+    <li><i class="fas fa-check-circle"></i> Metal‑free ceramic</li>
+    <li><i class="fas fa-check-circle"></i> Perfect fit</li>
+  </ul>
+  <div style="text-align: center;">
+    <a href="{% url 'clinic:booking' %}" class="btn btn-primary">Book This Service</a>
+    <br><br>
+    <a href="{% url 'clinic:services' %}"><i class="fas fa-arrow-left"></i> Back to All Services</a>
+  </div>
+</div>
+{% endblock %}

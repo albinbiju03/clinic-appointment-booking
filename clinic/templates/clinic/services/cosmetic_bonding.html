@@ -1,0 +1,48 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block title %}Dental Cleaning – SmileCare Dental{% endblock %}
+
+{% block extra_css %}
+
+<style>
+  .service-hero { background: linear-gradient(135deg, #FFB347, #FFD166); padding: 6rem 0 4rem; text-align: center; color: #333; clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%); margin-bottom: 3rem; }
+  .service-hero i { font-size: 5rem; margin-bottom: 1rem; animation: iconPulse 2s infinite; }
+  @keyframes iconPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.15);} }
+  .service-content { max-width: 900px; margin: 0 auto; padding: 0 1rem 4rem; }
+  .service-img { width: 100%; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+  .desc { font-size: 1.1rem; line-height: 1.9; color: #444; margin-bottom: 2rem; }
+  .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .benefits li { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; background: #fff8e1; padding: 0.8rem 1rem; border-radius: 10px; border-left: 4px solid #FFB347; transition: transform 0.3s, box-shadow 0.3s; }
+  .benefits li:hover { transform: translateX(8px); box-shadow: 0 6px 20px rgba(255,179,71,0.3); }
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+
+<section class="service-hero">
+  <i class="fas fa-smile-wink"></i>
+  <h1>Cosmetic Bonding</h1>
+  <p>Repair chips, cracks & gaps – composite artistry for natural beauty.</p>
+</section>
+
+<div class="service-content">
+  <img src="{% static 'clinic/images/services/cosmetic_bonding.jpg' %}" class="service-img" alt="Cosmetic Bonding" onerror="this.src='https://placehold.co/900x400/FFB347/333?text=Cosmetic+Bonding'">
+  <div class="desc">
+    Cosmetic bonding uses tooth‑coloured composite resin to fix minor imperfections in one visit. 
+    Ideal for small chips, gaps, or misshapen teeth. The material is sculpted and polished to blend seamlessly with your natural enamel. 
+    No drilling, no anaesthesia – a fast, affordable smile enhancement.
+  </div>
+  <ul class="benefits">
+    <li><i class="fas fa-check-circle"></i> No drilling</li>
+    <li><i class="fas fa-check-circle"></i> One appointment</li>
+    <li><i class="fas fa-check-circle"></i> Affordable smile enhancement</li>
+    <li><i class="fas fa-check-circle"></i> Natural‑looking results</li>
+  </ul>
+  <div style="text-align: center;">
+    <a href="{% url 'clinic:booking' %}" class="btn btn-primary">Book This Service</a>
+    <br><br>
+    <a href="{% url 'clinic:services' %}"><i class="fas fa-arrow-left"></i> Back to All Services</a>
+  </div>
+</div>
+{% endblock %}

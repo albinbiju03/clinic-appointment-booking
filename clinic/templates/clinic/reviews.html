@@ -1,0 +1,141 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block title %}Reviews & Testimonials – SmileCare Dental{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'clinic/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ================= HERO SECTION ================= -->
+<section class="reviews-hero">
+    <div class="container">
+        <h1>Patient Reviews</h1>
+        <p>Real experiences from real patients. Your feedback helps us grow.</p>
+    </div>
+</section>
+
+<!-- ================= REVIEWS SECTION ================= -->
+<section class="reviews-carousel">
+    <div class="container">
+
+        {% if reviews %}
+        <h2>What People Say</h2>
+
+        <div class="testimonial-grid" id="reviewGrid">
+            {% for review in reviews %}
+            <div class="testimonial-card">
+                <i class="fas fa-quote-left quote-icon"></i>
+
+                <div class="stars-display">
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= review.rating %}
+                            <i class="fas fa-star active-star"></i>
+                        {% else %}
+                            <i class="far fa-star inactive-star"></i>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <p class="review-text">{{ review.comment }}</p>
+
+                <div class="patient">
+                    <img src="https://ui-avatars.com/api/?name={{ review.name|urlencode }}&size=50&background=0F766E&color=fff"
+                         alt="{{ review.name }}">
+                    <div>
+                        <h5>{{ review.name }}</h5>
+                        <span>{{ review.created_at|date:"M d, Y" }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="carousel-controls">
+            <button id="prevReview" type="button">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button id="nextReview" type="button">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        {% else %}
+        <p class="no-reviews">No reviews yet. Be the first to share your experience!</p>
+        {% endif %}
+
+    </div>
+</section>
+
+<!-- ================= REVIEW FORM ================= -->
+<section class="review-form-section">
+    <div class="container">
+        <h2>Leave a Review</h2>
+
+        <div class="review-card">
+
+            {% if form.errors %}
+            <div class="form-errors-box">
+                <strong>Please fix the following:</strong>
+                {{ form.errors }}
+            </div>
+            {% endif %}
+
+            <form method="POST" class="review-form">
+                {% csrf_token %}
+
+                <!-- Name -->
+                <div class="form-group">
+                    <label for="{{ form.name.id_for_label }}">Your Name</label>
+                    {{ form.name }}
+                    {{ form.name.errors }}
+                </div>
+
+                <!-- Rating -->
+                <div class="form-group">
+    <label>Rating</label>
+
+    <div class="star-rating">
+        <input type="radio" id="star5" name="rating" value="5">
+        <label for="star5">★</label>
+
+        <input type="radio" id="star4" name="rating" value="4">
+        <label for="star4">★</label>
+
+        <input type="radio" id="star3" name="rating" value="3">
+        <label for="star3">★</label>
+
+        <input type="radio" id="star2" name="rating" value="2">
+        <label for="star2">★</label>
+
+        <input type="radio" id="star1" name="rating" value="1">
+        <label for="star1">★</label>
+    </div>
+
+    {{ form.rating.errors }}
+</div>
+
+                <!-- Comment -->
+                <div class="form-group">
+                    <label for="{{ form.comment.id_for_label }}">Your Experience</label>
+                    {{ form.comment }}
+                    {{ form.comment.errors }}
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="btn btn-primary submit-btn">
+                    Submit Review
+                </button>
+            </form>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'clinic/js/script.js' %}"></script>
+{% endblock %}

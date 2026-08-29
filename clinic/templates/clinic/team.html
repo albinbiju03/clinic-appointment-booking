@@ -1,0 +1,45 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block title %}Our Team – SmileCare Dental{% endblock %}
+
+{% block content %}
+<section style="padding: 6rem 0; background: #F8FAFC;">
+  <div class="container">
+    <h2 style="text-align:center; font-size:2.5rem; margin-bottom:3rem; color:#0F766E;">Meet Our Team</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:2rem;">
+
+      <!-- Static Founder 1 -->
+      <div style="background:#fff; border-radius:20px; padding:2rem; text-align:center; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
+        <img src="{% static 'clinic/images/founder.jpeg' %}" alt="Albin Biju" style="width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:1rem;">
+        <h4>Albin Biju</h4>
+        <p style="color:#666;">Web Developer & Founder</p>
+      </div>
+
+      <!-- Static Co‑Founder -->
+      <div style="background:#fff; border-radius:20px; padding:2rem; text-align:center; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
+        <img src="{% static 'clinic/images/co-founder.jpeg' %}" alt="Donald Mathew" style="width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:1rem;">
+        <h4>Donald Mathew</h4>
+        <p style="color:#666;">Web Developer & Co‑Founder</p>
+      </div>
+
+      <!-- Dynamic Doctors -->
+      {% for doctor in doctors %}
+      <div style="background:#fff; border-radius:20px; padding:2rem; text-align:center; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
+        {% if doctor.photo %}
+        <img src="{{ doctor.photo.url }}" alt="Dr. {{ doctor.name }}" style="width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:1rem;">
+        {% else %}
+        <img src="{% static 'clinic/images/default-doctor.jpg' %}" alt="Doctor" style="width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:1rem;">
+        {% endif %}
+        <h4>Dr. {{ doctor.name }}</h4>
+        <p style="color:#666;">{{ doctor.specialty }}</p>
+        <p style="font-size:0.9rem;">{{ doctor.bio|truncatewords:20 }}</p>
+      </div>
+      {% empty %}
+      <p style="text-align:center; grid-column:1/-1;">No doctors available at the moment. Add one via <a href="/admin/">Admin</a>.</p>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+{% endblock %}

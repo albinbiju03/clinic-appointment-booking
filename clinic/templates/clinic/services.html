@@ -1,0 +1,50 @@
+{% extends 'clinic/base.html' %}
+{% load static %}
+
+{% block title %}Our Services – SmileCare Dental{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'clinic/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ========== SERVICES HERO ========== -->
+<section class="services-hero">
+  <div class="container services-hero-content">
+    <h1>Our Dental Services</h1>
+    <p>Comprehensive care for every smile – from routine cleanings to advanced surgery.</p>
+  </div>
+  <div class="services-hero-shapes">
+    <span class="shape shape-1"></span>
+    <span class="shape shape-2"></span>
+    <span class="shape shape-3"></span>
+  </div>
+</section>
+
+<!-- ========== SERVICES GRID (dynamic from database) ========== -->
+<section class="services-listing reveal">
+  <div class="container">
+    <div class="services-grid" id="servicesGrid">
+      {% for service in services %}
+      <a href="{% url 'clinic:service_detail' service.slug %}" class="service-card">
+        <i class="{{ service.icon_class }}"></i>
+        <h3>{{ service.name }}</h3>
+        <p>{{ service.short_description }}</p>
+        <span class="card-badge">{{ service.badge_text }}</span>
+      </a>
+      {% empty %}
+      <div class="empty-message">
+        <i class="fas fa-tooth" style="font-size:3rem; color:var(--primary-light);"></i>
+        <p>Our services are being updated. Please check back soon!</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'clinic/js/script.js' %}"></script>
+{% endblock %}
