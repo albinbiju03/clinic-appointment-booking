@@ -19,16 +19,7 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('clinic.urls')),  # This includes all clinic URLs at the root
-    path('booking/', include('clinic.urls')),
-    path('booking/success/', include('clinic.urls')),   
-    
-
-# This will make /booking/ and /booking/success/ work
- 
-
- 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
